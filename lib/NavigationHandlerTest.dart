@@ -20,7 +20,6 @@ class NavigationHandlerTest extends StatefulWidget {
 class _NavigationHandlerTest extends State<NavigationHandlerTest> {
 
   static List<String> teams = ['Warriors', 'Heat', 'Memphis'];
-  var changed;
 
   void test() {
     bool listEmpty = EquipoState().getList().isEmpty;
