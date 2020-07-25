@@ -1,3 +1,5 @@
+import 'package:dra/CrearEquipo2.dart';
+import 'package:dra/Jugador.dart';
 import 'package:dra/NavigationHandlerTest.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +12,12 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  final _teamList = <Team>[];
+  final newTeam =Team(name: 'dra', playerlist: <Jugador>[]);
+
+  final _teamList = <Team>[];//<Team>[];
+
+
+
   final _currentIndex = 0;
 
   @override

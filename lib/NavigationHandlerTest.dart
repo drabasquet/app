@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'dart:ui';
 
+import 'package:dra/Team.dart';
 import 'package:flutter/material.dart';
 import 'Player.dart';
 import 'Equipo.dart';
@@ -9,8 +10,7 @@ class NavigationHandlerTest extends StatefulWidget {
   NavigationHandlerTest({Key key, this.teamList}) : super(key: key);
 
   //static List teamList = EquipoState().getList();
-  List teamList = <Equipo>[];
-
+  List teamList = <Team>[];
 
 
   @override
@@ -21,12 +21,22 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
 
   static List<String> teams = ['Warriors', 'Heat', 'Memphis'];
 
-  void test() {
-    bool listEmpty = EquipoState().getList().isEmpty;
-    if (!listEmpty){
-      EquipoState().getList();
+
+  //List<String> members = [for(int i = 0; i < json['members'].length; i++) json['members'][i].toString()];
+
+  List<String> test() {
+    int listCount = widget.teamList.length;
+    List<String> updateTeams = <String>[];
+    if (listCount>0){
+      print('length:' + widget.teamList.length.toString());
+      for(int i = 0; i<listCount; i++) {
+        print(widget.teamList[i].name);
+        updateTeams.add(widget.teamList[i].name);
+      }
+        return updateTeams;
     }else{
-      <Equipo>[];
+      List<String> noTeam = ['No teams created'];
+      return noTeam;
     }
   }
 
@@ -98,7 +108,7 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
           dropDownValue = newValue;
         });
       },
-      items: teams.map((String value) {
+      items: test().map((String value) {
         return new DropdownMenuItem<String>(
           value: value,
           child: new Text(value),

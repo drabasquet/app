@@ -15,10 +15,6 @@ class EquipoState extends State<Equipo> {
     setState(() {});
   }
 
-  List getList() {
-    return widget.teamList;
-  }
-
 
 
   Widget _buildlistteams() {
