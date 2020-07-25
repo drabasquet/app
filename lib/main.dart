@@ -12,16 +12,31 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  final newTeam =Team(name: 'dra', playerlist: <Jugador>[]);
+  var _playerList = <Jugador>[];
+  void submit2() {
+      _playerList.add( Jugador('d',1,0,0,0,'home',1));
+      _playerList.add( Jugador('r',2,0,0,0,'home',2));
+      _playerList.add( Jugador('e',3,0,0,0,'home',3));
+      _playerList.add( Jugador('a',4,0,0,0,'home',4));
+      _playerList.add( Jugador('m',5,0,0,0,'home',5));
+
+  }
 
   final _teamList = <Team>[];//<Team>[];
 
+  void submit3() {
+    _teamList.add(Team(name: 'dra', playerlist: _playerList));
+    _teamList.add(Team(name: 'rivals', playerlist: _playerList));
+  }
 
+  //final newTeam =Team(name: 'dra', playerlist: <Jugador>[]);
 
   final _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    submit2();
+    submit3();
     return MaterialApp(
       title: 'Dra App',
       theme: ThemeData(
