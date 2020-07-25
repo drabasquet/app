@@ -9,7 +9,6 @@ import 'Equipo.dart';
 class NavigationHandlerTest extends StatefulWidget {
   NavigationHandlerTest({Key key, this.teamList}) : super(key: key);
 
-  //static List teamList = EquipoState().getList();
   List teamList = <Team>[];
 
 
@@ -19,17 +18,10 @@ class NavigationHandlerTest extends StatefulWidget {
 
 class _NavigationHandlerTest extends State<NavigationHandlerTest> {
 
-  static List<String> teams = ['Warriors', 'Heat', 'Memphis'];
-
-
-  //List<String> members = [for(int i = 0; i < json['members'].length; i++) json['members'][i].toString()];
-
-  List<String> test() {
-    int listCount = widget.teamList.length;
+  List<String> updateTeamList() {
     List<String> updateTeams = <String>[];
-    if (listCount>0){
-      print('length:' + widget.teamList.length.toString());
-      for(int i = 0; i<listCount; i++) {
+    if (widget.teamList.length>0){
+      for(int i = 0; i<widget.teamList.length; i++) {
         print(widget.teamList[i].name);
         updateTeams.add(widget.teamList[i].name);
       }
@@ -42,11 +34,26 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
 
   static List<Player> players = [
     Player(name: 'Lebron', position: 'base', points: 10, assists: 0, fouls: 0),
-    Player(name: 'Curry', position: 'base', points: 5, assists: 0, fouls: 0),
-    Player(name: 'Gasol', position: 'pivot', points: 0, assists: 0, fouls: 0)
+    Player(name: 'Curry', position: 'base', points: 150, assists: 0, fouls: 0),
+    Player(name: 'Gasol', position: 'pivot', points: 20, assists: 0, fouls: 0)
   ];
 
   static String dropDownValue;
+
+  String getMaxPoints() {
+    int playersCount = players.length;
+    String mvp = '';
+    int mvpPoints = 0;
+    for (int i = 0; i<playersCount;i++){
+        if(players[i].points>mvpPoints){
+          mvpPoints = players[i].points;
+          mvp = players[i].name;
+        }else {
+          mvp = mvp;
+        }
+    }
+    return mvp;
+  }
 
 
   Widget playerPoints() { //player with most points
@@ -56,7 +63,7 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
       child: Card(
         margin: const EdgeInsets.all(10),
         color: Colors.green,
-        child: Text('Player with most points'),
+        child: Text('Player with most points: ' + getMaxPoints()),
       ),
     );
   }
@@ -108,7 +115,7 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
           dropDownValue = newValue;
         });
       },
-      items: test().map((String value) {
+      items: updateTeamList().map((String value) {
         return new DropdownMenuItem<String>(
           value: value,
           child: new Text(value),
