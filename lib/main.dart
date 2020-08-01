@@ -13,12 +13,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
   var _playerList = <Jugador>[];
+  var _playerList1 = <Jugador>[];
   void submit2() {
       _playerList.add( Jugador('d',1,0,0,0,'home',1));
       _playerList.add( Jugador('r',2,0,0,0,'home',2));
       _playerList.add( Jugador('e',3,0,0,0,'home',3));
       _playerList.add( Jugador('a',4,0,0,0,'home',4));
       _playerList.add( Jugador('m',5,0,0,0,'home',5));
+      _playerList1.add( Jugador('dd',1,0,0,0,'home',1));
+      _playerList1.add( Jugador('rr',2,0,0,0,'home',2));
+      _playerList1.add( Jugador('ee',3,0,0,0,'home',3));
+      _playerList1.add( Jugador('aa',4,0,0,0,'home',4));
+      _playerList1.add( Jugador('mm',5,0,0,0,'home',5));
 
   }
 
@@ -26,10 +32,8 @@ class MyApp extends StatelessWidget {
 
   void submit3() {
     _teamList.add(Team(name: 'dra', playerlist: _playerList));
-    _teamList.add(Team(name: 'rivals', playerlist: _playerList));
+    _teamList.add(Team(name: 'rivals', playerlist: _playerList1));
   }
-
-  //final newTeam =Team(name: 'dra', playerlist: <Jugador>[]);
 
   final _currentIndex = 0;
 
@@ -89,10 +93,6 @@ class _HomeState extends State<MyHomePage> {
     keepPage: true,
   );
 
-
-
-
-
   Widget buildPageView(){
     print(widget.currentIndex);
     return PageView(
@@ -107,10 +107,8 @@ class _HomeState extends State<MyHomePage> {
       children: <Widget>[
         NavigationHandlerTest(teamList: widget.teamList),
         Equipo(widget.teamList),
-        //NavigationHandler(Colors.red),
         NavigationHandler(Colors.yellow),
         GamePlayMain(widget.teamList),
-        //NavigationHandler(Colors.purple)
       ],
     );
   }
@@ -125,10 +123,10 @@ class _HomeState extends State<MyHomePage> {
 
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      /*appBar: AppBar(
+        //title: Text(widget.title),
         centerTitle: true,
-      ),
+      ),*/
       body: buildPageView(),//_children[_currentIndex],
       bottomNavigationBar: AnimatedContainer(//new Theme(
           height: _isVisible() ? 56.0 : 0.0,

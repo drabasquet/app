@@ -41,13 +41,14 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
   static String dropDownValue;
 
   String getMaxPoints() {
-    int playersCount = players.length;
+    int playersCount = widget.teamList[0].playerlist.length;
+    print('player list number: ' + playersCount.toString());
     String mvp = '';
     int mvpPoints = 0;
     for (int i = 0; i<playersCount;i++){
-        if(players[i].points>mvpPoints){
-          mvpPoints = players[i].points;
-          mvp = players[i].name;
+        if(widget.teamList[0].playerlist[i].playerPoints>mvpPoints){
+          mvpPoints = widget.teamList[0].playerlist[i].playerPoints;
+          mvp = widget.teamList[0].playerlist[i].playerName;
         }else {
           mvp = mvp;
         }
