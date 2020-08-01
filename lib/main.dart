@@ -61,6 +61,7 @@ class MyHomePage extends StatefulWidget {
 
 class _HomeState extends State<MyHomePage> {
 
+
   void onTabTapped(int index) {
     setState(() {
       widget.currentIndex = index;
@@ -74,10 +75,21 @@ class _HomeState extends State<MyHomePage> {
     });
   }
 
+  bool _isVisible () {
+    if (widget.currentIndex==3){
+      return false;
+    }
+    else {
+      return true;
+    }
+  }
+
   PageController pageController = PageController(
     initialPage: 0,
     keepPage: true,
   );
+
+
 
 
 
@@ -111,27 +123,31 @@ class _HomeState extends State<MyHomePage> {
       DeviceOrientation.portraitDown,
     ]);
 
+
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
         centerTitle: true,
       ),
       body: buildPageView(),//_children[_currentIndex],
-      bottomNavigationBar: new Theme(
-          data: Theme.of(context).copyWith(
+      bottomNavigationBar: AnimatedContainer(//new Theme(
+          height: _isVisible() ? 56.0 : 0.0,
+          duration: Duration(milliseconds: 500),
+          /*data: Theme.of(context).copyWith(
             canvasColor: Colors.blueAccent, //background color
             primaryColor: Colors.green, // selected items color
             textTheme: Theme
               .of(context)
               .textTheme
               .copyWith(caption: new TextStyle(color: Colors.white)) //unselected item color
-          ),
+          ),*/
           child: new BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
             onTap: (index) {
               onTabTapped(index);
             },
             currentIndex: widget.currentIndex,
+            showUnselectedLabels: false,
             items: [
               BottomNavigationBarItem(
                   icon: new Icon(Icons.home),
