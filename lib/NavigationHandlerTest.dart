@@ -45,14 +45,24 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
     print('player list number: ' + playersCount.toString());
     String mvp = '';
     int mvpPoints = 0;
-    for (int i = 0; i<playersCount;i++){
-        if(widget.teamList[0].playerlist[i].playerPoints>mvpPoints){
-          mvpPoints = widget.teamList[0].playerlist[i].playerPoints;
-          mvp = widget.teamList[0].playerlist[i].playerName;
-        }else {
-          mvp = mvp;
+    for (var team in widget.teamList){
+      print('team name: ' + team.name.toString());
+      for (int i = 0; i<playersCount;i++){
+        if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
+          print('dat is die team ' + team.name.toString());
+          if(team.playerlist[i].playerPoints>mvpPoints){ 
+            mvpPoints = team.playerlist[i].playerPoints;
+            mvp = team.playerlist[i].playerName;
+          }else {
+            mvp = mvp;
+          }
         }
+        else {
+          print('false');
+        }
+      }
     }
+
     return mvp;
   }
 
