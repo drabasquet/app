@@ -3,7 +3,6 @@ import 'dart:ui';
 
 import 'package:dra/Team.dart';
 import 'package:flutter/material.dart';
-import 'Player.dart';
 import 'Equipo.dart';
 
 class NavigationHandlerTest extends StatefulWidget {
@@ -32,26 +31,24 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
     }
   }
 
-  static List<Player> players = [
-    Player(name: 'Lebron', position: 'base', points: 10, assists: 0, fouls: 0),
-    Player(name: 'Curry', position: 'base', points: 150, assists: 0, fouls: 0),
-    Player(name: 'Gasol', position: 'pivot', points: 20, assists: 0, fouls: 0)
-  ];
-
   static String dropDownValue;
 
   String getMaxPoints() {
     int playersCount = widget.teamList[0].playerlist.length;
-    print('player list number: ' + playersCount.toString());
     String mvp = '';
     int mvpPoints = 0;
     for (var team in widget.teamList){
       print('team name: ' + team.name.toString());
-      for (int i = 0; i<playersCount;i++){
+      print('player list number: ' + team.playerlist.length.toString());
+      for (int i = 0; i<team.playerlist.length;i++){
         if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
-          print('dat is die team ' + team.name.toString());
-          if(team.playerlist[i].playerPoints>mvpPoints){ 
+          //print('dat is die team ' + team.name.toString() + ' dropdownvalue: ' + dropDownValue.toString());
+
+          if(team.playerlist[i].playerPoints>mvpPoints){
+            print('player with most points: ' + team.playerlist[i].playerName.toString() + ' from team: ' + team.name.toString());
+            print('enter');
             mvpPoints = team.playerlist[i].playerPoints;
+            print('mvp points: ' + mvpPoints.toString());
             mvp = team.playerlist[i].playerName;
           }else {
             mvp = mvp;
