@@ -20,11 +20,16 @@ class MyApp extends StatelessWidget {
       _playerList.add( Jugador('e',3,0,0,0,'home',3));
       _playerList.add( Jugador('a',4,0,0,0,'home',4));
       _playerList.add( Jugador('m',5,0,0,0,'home',5));
-      _playerList1.add( Jugador('dd',1,0,0,0,'home',1));
-      _playerList1.add( Jugador('rr',2,0,0,0,'home',2));
-      _playerList1.add( Jugador('ee',3,0,0,0,'home',3));
-      _playerList1.add( Jugador('aa',4,0,0,0,'home',4));
-      _playerList1.add( Jugador('mm',5,0,0,0,'home',5));
+      _playerList.add( Jugador('mm',6,0,0,0,'home',6));
+      _playerList.add( Jugador('ma',7,0,0,0,'home',6));
+      _playerList.add( Jugador('mar',8,0,0,0,'home',6));
+      _playerList.add( Jugador('marc',9,0,0,0,'home',6));
+      _playerList1.add( Jugador('dd',1,0,0,0,'visitor',1));
+      _playerList1.add( Jugador('rr',2,0,0,0,'visitor',2));
+      _playerList1.add( Jugador('ee',3,0,0,0,'visitor',3));
+      _playerList1.add( Jugador('aa',4,0,0,0,'visitor',4));
+      _playerList1.add( Jugador('mm',5,0,0,0,'visitor',5));
+      _playerList1.add( Jugador('mmmm',6,0,0,0,'visitor',6));
 
   }
 

@@ -16,25 +16,30 @@ class GamePlay extends StatefulWidget {
 
 class _GamePlayState extends State<GamePlay> {
   Map teamDic={};
+  Map teamDic1 = {};
   Map teams = {};
   void initState(){
     super.initState();
-    teamDic=_initDictionary(widget.llEquips[0].playerlist);
+    teamDic = _initDictionary(widget.llEquips[0].playerlist);
+    teamDic1 = _initDictionary(widget.llEquips[1].playerlist);
+    print('list of teamssss: ${widget.llEquips[0].playerlist}');
+    print('list of teamssss: ${widget.llEquips[1].playerlist}');
     teams = {
       'home': teamDic,
-      'visitor': {
-        1: Jugador('agus',1, 0, 0, 0, 'visitor', 1),
-        2: Jugador('agus',2, 0, 0, 0, 'visitor', 2),
-        3: Jugador('agus',3, 0, 0, 0, 'visitor', 3),
-        4: Jugador('agus',4, 0, 0, 0, 'visitor', 4),
-        5: Jugador('agus',5, 0, 0, 0, 'visitor', 5),
-        6: Jugador('agus',6, 0, 0, 0, 'visitor', 6),
-        7: Jugador('agus',7, 0, 0, 0, 'visitor', 6),
-        8: Jugador('agus',8, 0, 0, 0, 'visitor', 6),
-        9: Jugador('agus',9, 0, 0, 0, 'visitor', 6),
-      },
+      'visitor': teamDic1,
     };
   }
+      //'visitor': {
+      //  1: Jugador('agus',1, 0, 0, 0, 'visitor', 1),
+      //  2: Jugador('agus',2, 0, 0, 0, 'visitor', 2),
+      //  3: Jugador('agus',3, 0, 0, 0, 'visitor', 3),
+      //  4: Jugador('agus',4, 0, 0, 0, 'visitor', 4),
+      //  5: Jugador('agus',5, 0, 0, 0, 'visitor', 5),
+      //  6: Jugador('agus',6, 0, 0, 0, 'visitor', 6),
+      //  7: Jugador('agus',7, 0, 0, 0, 'visitor', 6),
+      //  8: Jugador('agus',8, 0, 0, 0, 'visitor', 6),
+      //  9: Jugador('agus',9, 0, 0, 0, 'visitor', 6),
+      //},
 
   Map _initDictionary(llplayers) {
     Map teamDic = {};
