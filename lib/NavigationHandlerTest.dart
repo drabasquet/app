@@ -120,6 +120,18 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
     return mvp;
   }
 
+  List<String> getListOfPlayers(){
+    List<String> players = List<String>();
+    for(var team in widget.teamList){
+      for (int i = 0; i<team.playerlist.length; i++) {
+        if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
+          players.add(team.playerlist[i].playerName);
+          print(team.playerlist[i].playerName + '\n');
+        }
+      }
+    }
+    return players;
+  }
 
   Widget playerPoints() { //player with most points
     return SizedBox(
@@ -164,7 +176,8 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
       child: Card(
         margin: const EdgeInsets.all(10),
         color: Colors.white,
-        child: Text('List of players in the team'),
+        child:
+          Text('List of players in the team: \n' + getListOfPlayers().toString()),
       ),
     );
   }

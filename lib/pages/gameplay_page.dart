@@ -6,6 +6,7 @@ import 'get_data_functions.dart';
 import '../main_ric.dart';
 import '../Team.dart';
 import '../Jugador.dart';
+import '../NavigationHandlerTest.dart';
 
 class GamePlay extends StatefulWidget {
   final List<Team> llEquips;
@@ -20,6 +21,7 @@ class _GamePlayState extends State<GamePlay> {
   Map teams = {};
   void initState(){
     super.initState();
+    //add here a dropdown to select home and visitor team!!
     teamDic = _initDictionary(widget.llEquips[0].playerlist);
     teamDic1 = _initDictionary(widget.llEquips[1].playerlist);
     print('list of teamssss: ${widget.llEquips[0].playerlist}');

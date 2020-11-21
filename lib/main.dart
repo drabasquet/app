@@ -14,6 +14,8 @@ class MyApp extends StatelessWidget {
 
   var _playerList = <Jugador>[];
   var _playerList1 = <Jugador>[];
+  var _playerList2 = <Jugador>[];
+  var _playerList3 = <Jugador>[];
   void submit2() {
       _playerList.add( Jugador('d',1,0,0,0,'home',1));
       _playerList.add( Jugador('r',2,0,0,0,'home',2));
@@ -24,12 +26,27 @@ class MyApp extends StatelessWidget {
       _playerList.add( Jugador('ma',7,0,0,0,'home',6));
       _playerList.add( Jugador('mar',8,0,0,0,'home',6));
       _playerList.add( Jugador('marc',9,0,0,0,'home',6));
+
       _playerList1.add( Jugador('dd',1,0,0,0,'visitor',1));
       _playerList1.add( Jugador('rr',2,0,0,0,'visitor',2));
       _playerList1.add( Jugador('ee',3,0,0,0,'visitor',3));
       _playerList1.add( Jugador('aa',4,0,0,0,'visitor',4));
       _playerList1.add( Jugador('mm',5,0,0,0,'visitor',5));
       _playerList1.add( Jugador('mmmm',6,0,0,0,'visitor',6));
+
+      _playerList2.add( Jugador('dd',1,0,0,0,'home',1));
+      _playerList2.add( Jugador('rr',2,0,0,0,'home',2));
+      _playerList2.add( Jugador('ee',3,0,0,0,'home',3));
+      _playerList2.add( Jugador('aa',4,0,0,0,'home',4));
+      _playerList2.add( Jugador('mm',5,0,0,0,'home',5));
+      _playerList2.add( Jugador('mmmm',6,0,0,0,'home',6));
+
+      _playerList3.add( Jugador('dd',1,0,0,0,'visitor',1));
+      _playerList3.add( Jugador('rr',2,0,0,0,'visitor',2));
+      _playerList3.add( Jugador('ee',3,0,0,0,'visitor',3));
+      _playerList3.add( Jugador('aa',4,0,0,0,'visitor',4));
+      _playerList3.add( Jugador('mm',5,0,0,0,'visitor',5));
+      _playerList3.add( Jugador('mmmm',6,0,0,0,'visitor',6));
 
   }
 
@@ -38,6 +55,8 @@ class MyApp extends StatelessWidget {
   void submit3() {
     _teamList.add(Team(name: 'dra', playerlist: _playerList));
     _teamList.add(Team(name: 'rivals', playerlist: _playerList1));
+    _teamList.add(Team(name: 'barsa', playerlist: _playerList2));
+    _teamList.add(Team(name: 'madrid', playerlist: _playerList3));
   }
 
   final _currentIndex = 0;
