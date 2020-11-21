@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'Equipo.dart';
 
 class NavigationHandlerTest extends StatefulWidget {
-  NavigationHandlerTest({Key key, this.teamList}) : super(key: key);
+  //NavigationHandlerTest({Key key, this.teamList}) : super(key: key);
 
-  List teamList = <Team>[];
+  List<Team> teamList;
+  NavigationHandlerTest(this.teamList);
 
 
   @override
@@ -25,7 +26,11 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
         updateTeams.add(widget.teamList[i].name);
       }
         return updateTeams;
-    }else{
+    }
+    else if(widget.teamList.length==-1){
+      print('entiredddddd');
+    }
+    else{
       List<String> noTeam = ['No teams created'];
       return noTeam;
     }

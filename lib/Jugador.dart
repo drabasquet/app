@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'db/database_provider.dart';
 
 
 class Jugador{
@@ -9,11 +10,25 @@ class Jugador{
   int playerRebounds;
   String team;
   int playerPosition;
-  //fouls MISSING
-
+  int id;
 
   Jugador(this.playerName, this.playerNumber, this.playerPoints, this.playerAssists,
-      this.playerRebounds, this.team, this.playerPosition);
+      this.playerRebounds, this.team, this.playerPosition, this.id);
 
+  Map<String, dynamic> toMap(){
+    return {
+      'id':id,
+      'PlayerName': playerName,
+      'PlayerNumber': playerNumber,
+      'team': team
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Jugador{id: $id, PlayerNname: $playerName, PlayerNumber: $playerNumber}';
+  }
 }
+
+
 

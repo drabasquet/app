@@ -7,71 +7,66 @@ import 'NavigationHandler.dart';
 import 'Team.dart';
 import 'Equipo.dart';
 import 'app.dart';
+import 'db/database_helper.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 
-  var _playerList = <Jugador>[];
-  var _playerList1 = <Jugador>[];
-  var _playerList2 = <Jugador>[];
-  var _playerList3 = <Jugador>[];
-  void submit2() {
-      _playerList.add( Jugador('d',1,0,0,0,'home',1));
-      _playerList.add( Jugador('r',2,0,0,0,'home',2));
-      _playerList.add( Jugador('e',3,0,0,0,'home',3));
-      _playerList.add( Jugador('a',4,0,0,0,'home',4));
-      _playerList.add( Jugador('m',5,0,0,0,'home',5));
-      _playerList.add( Jugador('mm',6,0,0,0,'home',6));
-      _playerList.add( Jugador('ma',7,0,0,0,'home',6));
-      _playerList.add( Jugador('mar',8,0,0,0,'home',6));
-      _playerList.add( Jugador('marc',9,0,0,0,'home',6));
 
-      _playerList1.add( Jugador('dd',1,0,0,0,'visitor',1));
-      _playerList1.add( Jugador('rr',2,0,0,0,'visitor',2));
-      _playerList1.add( Jugador('ee',3,0,0,0,'visitor',3));
-      _playerList1.add( Jugador('aa',4,0,0,0,'visitor',4));
-      _playerList1.add( Jugador('mm',5,0,0,0,'visitor',5));
-      _playerList1.add( Jugador('mmmm',6,0,0,0,'visitor',6));
 
-      _playerList2.add( Jugador('dd',1,0,0,0,'home',1));
-      _playerList2.add( Jugador('rr',2,0,0,0,'home',2));
-      _playerList2.add( Jugador('ee',3,0,0,0,'home',3));
-      _playerList2.add( Jugador('aa',4,0,0,0,'home',4));
-      _playerList2.add( Jugador('mm',5,0,0,0,'home',5));
-      _playerList2.add( Jugador('mmmm',6,0,0,0,'home',6));
-
-      _playerList3.add( Jugador('dd',1,0,0,0,'visitor',1));
-      _playerList3.add( Jugador('rr',2,0,0,0,'visitor',2));
-      _playerList3.add( Jugador('ee',3,0,0,0,'visitor',3));
-      _playerList3.add( Jugador('aa',4,0,0,0,'visitor',4));
-      _playerList3.add( Jugador('mm',5,0,0,0,'visitor',5));
-      _playerList3.add( Jugador('mmmm',6,0,0,0,'visitor',6));
-
-  }
-
-  final _teamList = <Team>[];//<Team>[];
-
-  void submit3() {
-    _teamList.add(Team(name: 'dra', playerlist: _playerList));
-    _teamList.add(Team(name: 'rivals', playerlist: _playerList1));
-    _teamList.add(Team(name: 'barsa', playerlist: _playerList2));
-    _teamList.add(Team(name: 'madrid', playerlist: _playerList3));
-  }
+  final teamList = <Team>[];
 
   final _currentIndex = 0;
+  final dbHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
-    submit2();
-    submit3();
+    void addTeam (String teamName, List<Jugador> _playerList )async{
+      var _localPlayerList = <Jugador>[];
+
+      _localPlayerList = _playerList.where((jugador)=>jugador.team==teamName).toList();
+
+
+      this.teamList.add(
+          Team(name:teamName, playerlist: _localPlayerList)
+      );
+      print('executed ' + this.teamList[0].playerlist[0].playerName);
+    }
+
+    void addTeams() async{
+      var _playerList = <Jugador>[];
+      var _nameTeamsList = <String>[];
+      _playerList = await dbHelper.getJugadores();
+      for (var i = 0; i < (_playerList.length); i++) {
+        String word = _playerList[i].team;
+        if (_nameTeamsList.contains(word)) {
+        } else {
+          _nameTeamsList.add(
+              word);
+        }
+      }
+
+      for (var i = 0; i < (_nameTeamsList.length); i++) {
+        addTeam(_nameTeamsList[i], _playerList);
+      }
+
+    }
+
+
+    addTeams();
+    final playerListtttt = List<Jugador>();
+    this.teamList.add(
+      Team(name:'dra',playerlist: playerListtttt)
+    );
     return MaterialApp(
       title: 'Dra App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(
-        title: 'Dra. App Home Page', teamList: _teamList, currentIndex: _currentIndex),
+        title: 'Dra. App Home Page', teamList: teamList, currentIndex: _currentIndex),
     );
   }
 }
@@ -129,7 +124,7 @@ class _HomeState extends State<MyHomePage> {
           pageChanged(index);
         },
       children: <Widget>[
-        NavigationHandlerTest(teamList: widget.teamList),
+        NavigationHandlerTest(widget.teamList),
         Equipo(widget.teamList),
         NavigationHandler(Colors.yellow),
         GamePlayMain(widget.teamList),
