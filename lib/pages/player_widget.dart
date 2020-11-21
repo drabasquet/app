@@ -55,9 +55,9 @@ class PlayerWidget extends StatelessWidget {
         1: '1 Point',
         2: '2 Points',
         3: '3 Points',
-        4: '1 Point missed',
-        5: '2 Points missed',
-        6: '3 Points missed',
+        4: '1 Assist',
+        5: '1 Rebound',
+        6: '1 Foul',
       };
       if (id != 0) {
         final snackBar = SnackBar(

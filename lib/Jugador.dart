@@ -9,6 +9,8 @@ class Jugador{
   int playerRebounds;
   String team;
   int playerPosition;
+  //fouls MISSING
+
 
   Jugador(this.playerName, this.playerNumber, this.playerPoints, this.playerAssists,
       this.playerRebounds, this.team, this.playerPosition);

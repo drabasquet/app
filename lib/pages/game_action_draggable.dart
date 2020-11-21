@@ -11,17 +11,17 @@ class GameAction extends StatelessWidget {
       1: '+1',
       2: '+2',
       3: '+3',
-      4: '+1m',
-      5: '+2m',
-      6: '+3m',
+      4: 'A',
+      5: 'R',
+      6: 'F',
     };
     Map actionDecodeValue = {
       1: 1,
       2: 2,
       3: 3,
-      4: 0,
-      5: 0,
-      6: 0,
+      4: 4,
+      5: 5,
+      6: 6,
     };
     return Positioned(
         left: _offset.dx,

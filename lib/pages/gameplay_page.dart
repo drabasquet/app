@@ -29,17 +29,6 @@ class _GamePlayState extends State<GamePlay> {
       'visitor': teamDic1,
     };
   }
-      //'visitor': {
-      //  1: Jugador('agus',1, 0, 0, 0, 'visitor', 1),
-      //  2: Jugador('agus',2, 0, 0, 0, 'visitor', 2),
-      //  3: Jugador('agus',3, 0, 0, 0, 'visitor', 3),
-      //  4: Jugador('agus',4, 0, 0, 0, 'visitor', 4),
-      //  5: Jugador('agus',5, 0, 0, 0, 'visitor', 5),
-      //  6: Jugador('agus',6, 0, 0, 0, 'visitor', 6),
-      //  7: Jugador('agus',7, 0, 0, 0, 'visitor', 6),
-      //  8: Jugador('agus',8, 0, 0, 0, 'visitor', 6),
-      //  9: Jugador('agus',9, 0, 0, 0, 'visitor', 6),
-      //},
 
   Map _initDictionary(llplayers) {
     Map teamDic = {};
@@ -53,9 +42,16 @@ class _GamePlayState extends State<GamePlay> {
 
   void _updatePage(player, playerDragged, actionId, actionValue) {
     setState(() {
-      if (actionId >= 1 && actionId <= 6) {
+      if (actionId >= 1 && actionId <= 3) {
         teams[player.team][player.playerNumber].playerPoints += actionValue;
-      } else if (actionId == 0 && player.team == playerDragged.team) {
+      }
+      else if(actionId==4){
+        teams[player.team][player.playerNumber].playerAssists += 1;
+      }
+      else if(actionId==5){
+        teams[player.team][player.playerNumber].playerRebounds += 1;
+      }
+      else if (actionId == 0 && player.team == playerDragged.team) {
         var playerPos = teams[player.team][player.playerNumber].playerPosition;
         var playerDraggedPos = teams[playerDragged.team]
                 [playerDragged.playerNumber]
@@ -227,6 +223,9 @@ class _ImageBannerState extends State<ImageBanner> {
             GameAction(1, Offset(245.0, 260.0)),
             GameAction(2, Offset(295.0, 260.0)),
             GameAction(3, Offset(345.0, 260.0)),
+            GameAction(4, Offset(245.0, 210.0)),
+            GameAction(5, Offset(295.0, 210.0)),
+            GameAction(6, Offset(345.0, 210.0)),
             // PlayerWidget(Player(9, 0, 0, 0, 'home', 6), true, widget.update),
           ],
         ));

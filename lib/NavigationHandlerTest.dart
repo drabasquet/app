@@ -42,13 +42,70 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
       print('player list number: ' + team.playerlist.length.toString());
       for (int i = 0; i<team.playerlist.length;i++){
         if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
-          //print('dat is die team ' + team.name.toString() + ' dropdownvalue: ' + dropDownValue.toString());
 
           if(team.playerlist[i].playerPoints>mvpPoints){
             print('player with most points: ' + team.playerlist[i].playerName.toString() + ' from team: ' + team.name.toString());
             print('enter');
             mvpPoints = team.playerlist[i].playerPoints;
             print('mvp points: ' + mvpPoints.toString());
+            mvp = team.playerlist[i].playerName;
+          }else {
+            mvp = mvp;
+          }
+        }
+        else {
+          print('false');
+        }
+      }
+    }
+
+    return mvp;
+  }
+
+  String getMaxAssists() {
+    int playersCount = widget.teamList[0].playerlist.length;
+    String mvp = '';
+    int mvpPoints = 0;
+    for (var team in widget.teamList){
+      print('team name: ' + team.name.toString());
+      print('player list number: ' + team.playerlist.length.toString());
+      for (int i = 0; i<team.playerlist.length;i++){
+        if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
+
+          if(team.playerlist[i].playerAssists>mvpPoints){
+            print('player with most assists: ' + team.playerlist[i].playerName.toString() + ' from team: ' + team.name.toString());
+            print('enter');
+            mvpPoints = team.playerlist[i].playerAssists;
+            print('mvp assists: ' + mvpPoints.toString());
+            mvp = team.playerlist[i].playerName;
+          }else {
+            mvp = mvp;
+          }
+        }
+        else {
+          print('false');
+        }
+      }
+    }
+
+    return mvp;
+  }
+
+  String getMaxRebounds() {
+    int playersCount = widget.teamList[0].playerlist.length;
+    String mvp = '';
+    int mvpPoints = 0;
+    for (var team in widget.teamList){
+      print('team name: ' + team.name.toString());
+      print('player list number: ' + team.playerlist.length.toString());
+      for (int i = 0; i<team.playerlist.length;i++){
+        if(dropDownValue!=null && team.name.toString().contains(dropDownValue)){
+
+          if(team.playerlist[i].playerRebounds>mvpPoints){
+            print('player with most rebounds: ' + team.playerlist[i].playerName.toString() + ' from team: ' + team.name.toString());
+            print('enter');
+            mvpPoints = team.playerlist[i].playerRebounds;
+            print('mvp rebounds: ' + mvpPoints.toString());
             mvp = team.playerlist[i].playerName;
           }else {
             mvp = mvp;
@@ -83,7 +140,7 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
       child: Card(
         margin: const EdgeInsets.all(10),
         color: Colors.red,
-        child: Text('Player with most assists')
+        child: Text('Player with most assists: ' + getMaxAssists())
       ),
     );
   }
@@ -95,7 +152,7 @@ class _NavigationHandlerTest extends State<NavigationHandlerTest> {
       child: Card(
         margin: const EdgeInsets.all(10),
         color: Colors.blueAccent,
-        child: Text('Player with most rebounds'),
+        child: Text('Player with most rebounds: ' + getMaxRebounds()),
       ),
     );
   }
