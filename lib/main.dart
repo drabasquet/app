@@ -8,6 +8,7 @@ import 'Team.dart';
 import 'Equipo.dart';
 import 'app.dart';
 import 'db/database_helper.dart';
+import 'package:dra/DropdownSelectTeam.dart';
 
 void main() => runApp(MyApp());
 
@@ -78,7 +79,6 @@ class MyHomePage extends StatefulWidget {
   int currentIndex;
   @override
 
-
   _HomeState createState() => _HomeState();
 }
 
@@ -127,7 +127,7 @@ class _HomeState extends State<MyHomePage> {
         NavigationHandlerTest(widget.teamList),
         Equipo(widget.teamList),
         NavigationHandler(Colors.yellow),
-        GamePlayMain(widget.teamList),
+        DropdownSelectTeam(widget.teamList),
       ],
     );
   }

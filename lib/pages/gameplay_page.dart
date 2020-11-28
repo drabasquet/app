@@ -1,3 +1,4 @@
+import 'package:dra/Equipo.dart';
 import 'package:flutter/material.dart';
 import 'package:dra/Jugador.dart';
 import 'game_action_draggable.dart';
@@ -19,6 +20,10 @@ class _GamePlayState extends State<GamePlay> {
   Map teamDic={};
   Map teamDic1 = {};
   Map teams = {};
+  bool teamSelected = false;
+  bool homeTeamSelected = false;
+  bool awayTeamSelected = false;
+  var commandScreen = 'selectTeam';
   void initState(){
     super.initState();
     //add here a dropdown to select home and visitor team!!
@@ -66,32 +71,144 @@ class _GamePlayState extends State<GamePlay> {
     });
   }
 
+  static String dropDownValueHome, dropDownValueVisitor;
+  List testin = ['m', 'n', 'o','p'];
+
+  static NavigationHandlerTest nh;
+
+  List<String> getTeams(){
+    List<String> teams = <String>[];
+    print('widget llequip length: ' + widget.llEquips.length.toString());
+    for(int i = 0; i<widget.llEquips.length; i++){
+      print('widget name: ' + widget.llEquips[i].name);
+      teams.add(widget.llEquips[i].name);
+    }
+    return teams;
+  }
+
+  List<Jugador> getTeamPlayerList (String teamName, List<Team> _teamList ){
+    print('team nameeee: ' + teamName);
+    print(_teamList);
+    var _localTeamList = <Team>[];
+
+    _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
+    widget.llEquips[0].playerlist = _localTeamList[0].playerlist;
+    return _localTeamList[0].playerlist;
+  }
+
+  Widget dropDownListHome() {
+    return DropdownButton<String> (
+      //value: dropDownValue,
+      icon: Icon(Icons.arrow_drop_down),
+      hint: Text('Please choose the home team'),
+      value: dropDownValueHome,
+      onChanged: (newValue) {
+        setState(() {
+          dropDownValueHome = newValue;
+          homeTeamSelected = true;
+          teamDic = _initDictionary(getTeamPlayerList(dropDownValueHome, widget.llEquips));
+        });
+      },
+      items: getTeams().map((String value) {
+        return new DropdownMenuItem<String>(
+          value: value,
+          child: new Text(value),
+        );
+      }).toList(),
+    );
+  }
+  Widget dropDownListVisitor() {
+    return DropdownButton<String> (
+      //value: dropDownValue,
+      icon: Icon(Icons.arrow_drop_down),
+      hint: Text('Please choose the away team'),
+      value: dropDownValueVisitor,
+      onChanged: (newValue) {
+        setState(() {
+          dropDownValueVisitor = newValue;
+          awayTeamSelected = true;
+          teamDic1 = _initDictionary(getTeamPlayerList(dropDownValueVisitor, widget.llEquips));
+        });
+      },
+      items: getTeams().map((String value) {
+        return new DropdownMenuItem<String>(
+          value: value,
+          child: new Text(value),
+        );
+      }).toList(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     print('Game executed');
     print(widget.llEquips[0].name);
-    return Scaffold(
-        body: SafeArea(
-            child: Row(
-      // crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        OptionsBar(teams, _updatePage, widget.llEquips),
-        Container(
-            width: MediaQuery.of(context).size.width - 55.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                ImageBanner(
-                  assetPath: "assets/Images/basketball_court.jpg",
-                  teams: teams,
-                  update: _updatePage,
-                ),
-                PlayersContainer(teams: teams, update: _updatePage),
-              ],
-            )),
-        // DragBox(Offset(200.0, 0.0), 'Box One', Colors.blueAccent),
-      ],
-    )));
+
+    //if(homeTeamSelected && awayTeamSelected){
+    //  teamSelected = true;
+    //}
+
+    //if(!teamSelected) {
+    //  commandScreen = 'selectTeam';
+    //}
+    //else {
+    //  commandScreen = 'startMatch';
+    //}
+
+    commandScreen = 'startMatch';
+
+    switch(commandScreen){
+      case 'selectTeam':
+        return Scaffold(
+          body: SingleChildScrollView(
+            child:
+              Column(
+                children:[
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        child: dropDownListHome(),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: <Widget>[
+                      Container(
+                        child: dropDownListVisitor(),
+                      ),
+                    ],
+                  )
+                ]
+              ),
+          ),
+        );
+        break;
+      case 'startMatch':
+        return Scaffold(
+            body: SafeArea(
+                child: Row(
+                  // crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    OptionsBar(teams, _updatePage, widget.llEquips),
+                    Container(
+                        width: MediaQuery.of(context).size.width - 55.0,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: <Widget>[
+                            ImageBanner(
+                              assetPath: "assets/Images/basketball_court.jpg",
+                              teams: teams,
+                              update: _updatePage,
+                            ),
+                            PlayersContainer(teams: teams, update: _updatePage),
+                          ],
+                        )),
+                    // DragBox(Offset(200.0, 0.0), 'Box One', Colors.blueAccent),
+                  ],
+                )));
+        break;
+    }
+
   }
 }
 
