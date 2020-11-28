@@ -17,7 +17,7 @@ class Jugador{
 
   Map<String, dynamic> toMap(){
     return {
-      'id':id,
+      'id':playerPosition,
       'PlayerName': playerName,
       'PlayerNumber': playerNumber,
       'team': team
@@ -26,7 +26,7 @@ class Jugador{
 
   @override
   String toString() {
-    return 'Jugador{id: $id, PlayerNname: $playerName, PlayerNumber: $playerNumber}';
+    return 'Jugador{playerPos: $playerPosition, PlayerNname: $playerName, PlayerNumber: $playerNumber}';
   }
 }
 

@@ -39,11 +39,28 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
     return teams;
   }
 
-  void getTeamPlayerList (String teamName, List<Team> _teamList ){
+  void getTeamPlayerListHome (String teamName, List<Team> _teamList ){
     print('team nameeee: ' + teamName);
     print(_teamList);
     var _localTeamList = <Team>[];
     _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
+    for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
+      _localTeamList[0].playerlist[i].team = 'home';
+    }
+    this.teamList.add(_localTeamList[0]);
+    //return _localTeamList;
+    //widget.llEquips[0].playerlist = _localTeamList[0].playerlist;
+    //return _localTeamList[0].playerlist;
+  }
+
+  void getTeamPlayerListAway (String teamName, List<Team> _teamList ){
+    print('team nameeee: ' + teamName);
+    print(_teamList);
+    var _localTeamList = <Team>[];
+    _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
+    for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
+      _localTeamList[0].playerlist[i].team = 'visitor';
+    }
     this.teamList.add(_localTeamList[0]);
     //return _localTeamList;
     //widget.llEquips[0].playerlist = _localTeamList[0].playerlist;
@@ -60,7 +77,7 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
         setState(() {
           dropDownValueHome = newValue;
           homeTeamSelected = true;
-          getTeamPlayerList(dropDownValueHome, widget.llEquips);
+          getTeamPlayerListHome(dropDownValueHome, widget.llEquips);
         });
       },
       items: getTeams().map((String value) {
@@ -81,7 +98,7 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
         setState(() {
           dropDownValueVisitor = newValue;
           awayTeamSelected = true;
-          getTeamPlayerList(dropDownValueVisitor, widget.llEquips);
+          getTeamPlayerListAway(dropDownValueVisitor, widget.llEquips);
           Navigator.push(
               context,
               MaterialPageRoute(
