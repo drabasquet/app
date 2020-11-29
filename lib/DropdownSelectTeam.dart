@@ -45,7 +45,7 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
     var _localTeamList = <Team>[];
     _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
     for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
-      _localTeamList[0].playerlist[i].team = 'home';
+      _localTeamList[0].playerlist[i].matchPlace = 'home';
     }
     this.teamList.add(_localTeamList[0]);
     //return _localTeamList;
@@ -59,7 +59,7 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
     var _localTeamList = <Team>[];
     _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
     for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
-      _localTeamList[0].playerlist[i].team = 'visitor';
+      _localTeamList[0].playerlist[i].matchPlace = 'visitor';
     }
     this.teamList.add(_localTeamList[0]);
     //return _localTeamList;
@@ -117,6 +117,10 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
     return Scaffold(
       body: SingleChildScrollView(
         child:

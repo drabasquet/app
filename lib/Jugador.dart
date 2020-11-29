@@ -11,9 +11,10 @@ class Jugador{
   String team;
   int playerPosition;
   int id;
+  String matchPlace;
 
   Jugador(this.playerName, this.playerNumber, this.playerPoints, this.playerAssists,
-      this.playerRebounds, this.team, this.playerPosition, this.id);
+      this.playerRebounds, this.team, this.playerPosition, this.id, this.matchPlace);
 
   Map<String, dynamic> toMap(){
     return {

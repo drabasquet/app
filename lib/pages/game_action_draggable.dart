@@ -27,7 +27,7 @@ class GameAction extends StatelessWidget {
         left: _offset.dx,
         top: _offset.dy,
         child: Draggable(
-          data: [_id, actionDecodeMeaning[_id], actionDecodeValue[_id], Jugador('agus',999, 0, 0, 0, '', 0, 0)],
+          data: [_id, actionDecodeMeaning[_id], actionDecodeValue[_id], Jugador('agus',999, 0, 0, 0, '', 0, 0,'')],
           child: Container(
               padding: const EdgeInsets.all(5),
               decoration: BoxDecoration(

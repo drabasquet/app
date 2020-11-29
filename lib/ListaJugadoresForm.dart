@@ -46,7 +46,7 @@ class ListaJugadoresFormState extends State<ListaJugadoresForm> {
     int id= await _insert(_name, _number,widget.name);
     setState(() {
       _playerList.add(
-        Jugador(_name,_number,0,0,0,widget.name,_number,id),
+        Jugador(_name,_number,0,0,0,widget.name,_number,id, ''),
       );
     });
     print(await dbHelper.getJugadores());

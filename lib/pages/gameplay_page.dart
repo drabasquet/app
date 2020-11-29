@@ -50,29 +50,28 @@ class _GamePlayState extends State<GamePlay> {
   void _updatePage(player, playerDragged, actionId, actionValue) {
     setState(() {
       if (actionId >= 1 && actionId <= 3) {
-        teams[player.team][player.playerNumber].playerPoints += actionValue;
+        teams[player.matchPlace][player.playerNumber].playerPoints += actionValue;
       }
       else if(actionId==4){
-        teams[player.team][player.playerNumber].playerAssists += 1;
+        teams[player.matchPlace][player.playerNumber].playerAssists += 1;
       }
       else if(actionId==5){
-        teams[player.team][player.playerNumber].playerRebounds += 1;
+        teams[player.matchPlace][player.playerNumber].playerRebounds += 1;
       }
-      else if (actionId == 0 && player.team == playerDragged.team) {
-        var playerPos = teams[player.team][player.playerNumber].playerPosition;
-        var playerDraggedPos = teams[playerDragged.team]
+      else if (actionId == 0 && player.matchPlace == playerDragged.matchPlace) {
+        var playerPos = teams[player.matchPlace][player.playerNumber].playerPosition;
+        var playerDraggedPos = teams[playerDragged.matchPlace]
                 [playerDragged.playerNumber]
             .playerPosition;
-        teams[player.team][player.playerNumber].playerPosition =
+        teams[player.matchPlace][player.playerNumber].playerPosition =
             playerDraggedPos;
-        teams[playerDragged.team][playerDragged.playerNumber].playerPosition =
+        teams[playerDragged.matchPlace][playerDragged.playerNumber].playerPosition =
             playerPos;
       }
     });
   }
 
   static String dropDownValueHome, dropDownValueVisitor;
-  List testin = ['m', 'n', 'o','p'];
 
   static NavigationHandlerTest nh;
 
@@ -306,7 +305,8 @@ class _ImageBannerState extends State<ImageBanner> {
   @override
   Widget build(BuildContext context) {
     print('ImageBanner executed');
-    print(widget.teams);
+    var teamList = widget.teams.keys.toList();
+    print(teamList);
     return Container(
         constraints: BoxConstraints.expand(
           height: MediaQuery.of(context).size.height * 0.80,
@@ -323,22 +323,16 @@ class _ImageBannerState extends State<ImageBanner> {
           children: <Widget>[
             for (var val in widget.teams.values)
               for (var player in val.values)
-                if (player.playerPosition <= 5)
+                if (player.playerPosition <= 5 && widget.teams.containsKey('home'))
                   PlayerWidget(
                     player,
                     true,
                     widget.update,
-                  ),
-            /* // Home Players
-            PlayerWidget(
-              widget.teams['home'][1],
-              true,
-            ),*/
-            /* PlayerWidget2(
-                Player(
-                    5, widget.teams['home'][1].playerPoints, 0, 0, 'home', 5),
-                true,
-                widget.update), */
+                    teamList[0],
+                  )
+                else if(player.playerPosition <= 5 && widget.teams.containsKey('visitor'))
+                  PlayerWidget(player, true, widget.update, teamList[1]),
+
             GameAction(1, Offset(245.0, 260.0)),
             GameAction(2, Offset(295.0, 260.0)),
             GameAction(3, Offset(345.0, 260.0)),
@@ -364,6 +358,8 @@ class _PlayersContainerState extends State<PlayersContainer> {
   List<int> benchPlayers = [6, 7, 8, 9];
   @override
   Widget build(BuildContext context) {
+    var teamList = widget.teams.keys.toList();
+
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -386,6 +382,7 @@ class _PlayersContainerState extends State<PlayersContainer> {
                           player,
                           false,
                           widget.update,
+                          teamList[0],
                         )),
                       ],
                     ),
@@ -407,31 +404,10 @@ class _PlayersContainerState extends State<PlayersContainer> {
                           player,
                           false,
                           widget.update,
+                          teamList[1],
                         )),
-                        
                       ],
                     )
-                /* PlayerWidget(
-                    Player(9, 0, 0, 0, 'home', 6), false, widget.update),
-                SizedBox(width: 5.0),
-                Draggable(
-                  key: ValueKey(1),
-                  data: [0, '', 0, true],
-                  child: Container(
-                    child: Center(child: Text('1')),
-                    color: Colors.white,
-                  ),
-                  feedback: Container(
-                    child: Center(child: Text('1')),
-                    color: Colors.grey,
-                    width: 70.0,
-                    height: 50.0,
-                  ),
-                  childWhenDragging: Container(
-                    child: Center(child: Text('1')),
-                    color: Colors.red,
-                  ),
-                ), */
               ]),
             ),
           ],

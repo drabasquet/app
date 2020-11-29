@@ -17,7 +17,8 @@ class PlayerWidget extends StatelessWidget {
   final Jugador player;
   final bool showStats;
   final Function update;
-  PlayerWidget(this.player, this.showStats, this.update);
+  final String teams;
+  PlayerWidget(this.player, this.showStats, this.update, this.teams);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class PlayerWidget extends StatelessWidget {
     int playerPts = player.playerPoints;
     int playerAst = player.playerAssists;
     int playerRbs = player.playerRebounds;
-    String playerTeam = player.team;
+    String playerTeam = player.matchPlace;//player.team;
     int playerPos = player.playerPosition;
     Map iconsDict = {
       0: Icons.filter,

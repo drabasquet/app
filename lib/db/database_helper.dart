@@ -99,7 +99,7 @@ class DatabaseHelper {
 
     // Convert the List<Map<String, dynamic> into a List<Dog>.
     return List.generate(maps.length, (i) {
-      return Jugador( maps[i]['name'],maps[i]['number'],0,0,0,maps[i]['team'],maps[i]['number'],maps[i]['_id']);
+      return Jugador( maps[i]['name'],maps[i]['number'],0,0,0,maps[i]['team'],maps[i]['number'],maps[i]['_id'], '');
     });
   }
 
