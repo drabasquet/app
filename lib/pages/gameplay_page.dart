@@ -271,7 +271,7 @@ class OptionsBar extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Home(llEquips),
+                    builder: (context) => NavigationHandlerTest(llEquips), //Home(llEquips),
                   ),
                 );
               },

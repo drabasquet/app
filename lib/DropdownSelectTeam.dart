@@ -25,46 +25,33 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
   List<Team> teamList = <Team>[];
 
   static String dropDownValueHome, dropDownValueVisitor;
-  List testin = ['m', 'n', 'o','p'];
 
   static NavigationHandlerTest nh;
 
   List<String> getTeams(){
     List<String> teams = <String>[];
-    print('widget llequip length: ' + widget.llEquips.length.toString());
     for(int i = 0; i<widget.llEquips.length; i++){
-      print('widget name: ' + widget.llEquips[i].name);
       teams.add(widget.llEquips[i].name);
     }
     return teams;
   }
 
   void getTeamPlayerListHome (String teamName, List<Team> _teamList ){
-    print('team nameeee: ' + teamName);
-    print(_teamList);
     var _localTeamList = <Team>[];
     _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
     for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
       _localTeamList[0].playerlist[i].matchPlace = 'home';
     }
     this.teamList.add(_localTeamList[0]);
-    //return _localTeamList;
-    //widget.llEquips[0].playerlist = _localTeamList[0].playerlist;
-    //return _localTeamList[0].playerlist;
   }
 
   void getTeamPlayerListAway (String teamName, List<Team> _teamList ){
-    print('team nameeee: ' + teamName);
-    print(_teamList);
     var _localTeamList = <Team>[];
     _localTeamList = _teamList.where((team)=>team.name==teamName).toList();
     for(int i = 0;i<_localTeamList[0].playerlist.length; i++){
       _localTeamList[0].playerlist[i].matchPlace = 'visitor';
     }
     this.teamList.add(_localTeamList[0]);
-    //return _localTeamList;
-    //widget.llEquips[0].playerlist = _localTeamList[0].playerlist;
-    //return _localTeamList[0].playerlist;
   }
 
   Widget dropDownListHome() {
@@ -122,13 +109,26 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
       DeviceOrientation.landscapeLeft,
     ]);
     return Scaffold(
-      body: SingleChildScrollView(
+      body:
+      Container(
+        decoration: BoxDecoration(
+          image: new DecorationImage(
+            image: new AssetImage(
+              "assets/Images/basketball_court.jpg",
+            ),
+            fit: BoxFit.cover,
+          ),
+        ),
+      child:
+      SingleChildScrollView(
         child:
-        Column(
+        Row(
             children:[
               Column(
                 children: <Widget>[
                   Container(
+                    margin: EdgeInsets.all(50),
+                    padding: EdgeInsets.only(top: 50),
                     child: dropDownListHome(),
                   ),
                 ],
@@ -136,12 +136,15 @@ class _DropdownSelectTeamState extends State<DropdownSelectTeam> {
               Column(
                 children: <Widget>[
                   Container(
+                    margin: EdgeInsets.all(50),
+                    padding: EdgeInsets.only(top: 50),
                     child: dropDownListVisitor(),
                   ),
                 ],
               )
             ]
         ),
+      ),
       ),
     );
   }

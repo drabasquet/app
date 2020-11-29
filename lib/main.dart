@@ -127,7 +127,7 @@ class _HomeState extends State<MyHomePage> {
         NavigationHandlerTest(widget.teamList),
         Equipo(widget.teamList),
         NavigationHandler(Colors.yellow),
-        DropdownSelectTeam(widget.teamList),
+        DropdownSelectTeam(widget.teamList)
       ],
     );
   }
